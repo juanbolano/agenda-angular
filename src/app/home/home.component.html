@@ -1,5 +1,5 @@
-<h1>¡Hola {{currentUser.firstName}}!</h1>
-<p>¡Bienvenido a la agenda!</p>
+<h1 class="h1 h1-custom">¡Hola {{currentUser.firstName}}!</h1>
+<h4>Agregar contacto a la agenda</h4>
 <!-- <h3>All registered users:</h3>
 <ul>
     <li *ngFor="let user of users">
@@ -8,32 +8,44 @@
 </ul> -->
 <form [formGroup]="contactsForm" (ngSubmit)="onSubmit()">
 
-    <div>
-        <label for="first_name">
+    <div class="form-group">
+        <label for="first_name" class="custom">
           Nombre
         </label>
-        <input id="first_name" type="text" formControlName="first_name">
+        <input id="first_name" type="text" formControlName="first_name" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
+        <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+            <div *ngIf="f.first_name.errors.required">First Name is required</div>
+        </div>
     </div>
 
-    <div>
-        <label for="last_name">
+    <div class="form-group">
+        <label for="last_name" class="custom">
           Apellido
         </label>
-        <input id="last_name" type="text" formControlName="last_name">
+        <input id="last_name" type="text" formControlName="last_name" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }">
+        <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+            <div *ngIf="f.last_name.errors.required">Last Name is required</div>
+        </div>
     </div>
 
-    <div>
-        <label for="age">
+    <div class="form-group">
+        <label for="age" class="custom">
           Edad
         </label>
-        <input id="age" type="text" formControlName="age">
+        <input id="age" type="text" formControlName="age" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.age.errors }">
+        <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+            <div *ngIf="f.age.errors.required">Age is required</div>
+        </div>
     </div>
 
-    <div>
-        <label for="email">
+    <div class="form-group">
+        <label for="email" class="custom">
           Email
         </label>
-        <input id="email" type="text" formControlName="email">
+        <input id="email" type="text" formControlName="email" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+        </div>
     </div>
 
     <button class="button">Guardar</button>

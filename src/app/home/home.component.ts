@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
     users2 = [];
     contacts = contacts;
     contactsForm: FormGroup;
+    submitted = false;
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -38,6 +39,7 @@ export class HomeComponent implements OnInit {
     get f() { return this.contactsForm.controls; }
 
     onSubmit() {
+        this.submitted = true;
 
         // reset alerts on submit
         this.alertService.clear();
@@ -46,6 +48,7 @@ export class HomeComponent implements OnInit {
         if (this.contactsForm.invalid) {
             return;
         }
+        this.submitted = false;
 
         // Process checkout data here
         this.contacts.push(this.contactsForm.value)        

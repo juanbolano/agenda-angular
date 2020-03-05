@@ -1,4 +1,8 @@
-<h2>Login</h2>
+<div class="text-center">
+    <h1 class="h1 h1-custom">Agenda personal</h1>
+    <img src="src/agenda.png" alt="image" class="rounded"/>
+    <h2 class="h2 h2-custom">Login</h2>
+</div>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
         <label for="username">Username</label>
@@ -19,6 +23,5 @@
             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
             Login
         </button>
-        <a routerLink="/register" class="btn btn-link">Register</a>
     </div>
 </form>

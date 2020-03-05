@@ -1,19 +1,24 @@
 <!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/">Home</a>
-        <a class="nav-item nav-link" (click)="logout()">Logout</a>
-    </div>
+
+<nav class="navbar navbar-expand navbar-custom">    
+    <div class="navbar-nav">    
+        <ng-container *ngIf="currentUser; then loggedIn; else loggedOut"></ng-container>
+        <ng-template #loggedIn>
+            <a class="button fancy-button" routerLink="/"><i class="material-icons">home</i>Home</a>
+            <a class="button fancy-button" (click)="logout()"><i class="material-icons">exit_to_app</i>Logout</a>
+        </ng-template>
+        <ng-template #loggedOut>
+            <a class="button fancy-button" routerLink="/"><i class="material-icons">home</i>Home</a>
+            <a class="button fancy-button" routerLink="/login"><i class="material-icons">vpn_key</i>Login</a>
+            <a class="button fancy-button" routerLink="/register"><i class="material-icons">fiber_new</i>Register</a>
+        </ng-template>
+    </div>    
 </nav>
 
 <!-- main content container -->
-<div class="jumbotron">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-8 offset-sm-2">
-                <alert></alert>
-                <router-outlet></router-outlet>
-            </div>
-        </div>
+<div class="container">
+    <div class="col-sm-8 offset-sm-2">
+        <alert></alert>
+        <router-outlet></router-outlet>
     </div>
 </div>
