@@ -8,6 +8,14 @@ export class UserService {
     getAll() {
         return this.http.get<any[]>(`${config.apiUrl}/users`);
     }
+    
+    getAll2() {
+        return this.http.get<any[]>(`${config.apiUrl}/users2`);
+    }
+
+    createUser(user) {
+        return this.http.post(`${config.apiUrl}/users/create`, user);
+    }
 
     register(user) {
         return this.http.post(`${config.apiUrl}/users/register`, user);

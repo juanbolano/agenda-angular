@@ -5,6 +5,7 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 // array in local storage for registered users
 let users = JSON.parse(localStorage.getItem('users')) || [{ id: 1, firstName: 'Juan', lastName: 'Bolaño', username: 'admin', password: 'admin' }];
+let users2 = JSON.parse(localStorage.getItem('users2')) || [{ first_name: 'John', last_name: 'Doe', age: 29, email: 'john@doe.com' },{ first_name: 'Juan', last_name: 'Perez', age: 27, email: 'juan@perez.com' }];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -24,10 +25,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return authenticate();
                 case url.endsWith('/users/register') && method === 'POST':
                     return register();
-                    case url.endsWith('/users') && method === 'GET':
-                        return getUsers();
-                    case url.match(/\/users\/\d+$/) && method === 'DELETE':
-                        return deleteUser();
+                case url.endsWith('/users/create') && method === 'POST':
+                    return createUser();
+                case url.endsWith('/users') && method === 'GET':
+                    return getUsers();
+                case url.endsWith('/users2') && method === 'GET':
+                    return getUsers2();
+                case url.match(/\/users\/\d+$/) && method === 'DELETE':
+                    return deleteUser();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -63,9 +68,27 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return ok();
         }
 
+        function createUser()
+        {            
+            const user = body
+
+            if (users2.find(x => x.email === user.email)) {
+                return error('Email "' + user.email + '" is already taken')
+            }
+
+            users2.push(user);
+            localStorage.setItem('users2', JSON.stringify(users2));
+            return ok();
+        }
+
         function getUsers() {
             if (!isLoggedIn()) return unauthorized();
             return ok(users);
+        }
+
+        function getUsers2() {
+            if (!isLoggedIn()) return unauthorized();
+            return ok(users2);
         }
 
         function deleteUser() {

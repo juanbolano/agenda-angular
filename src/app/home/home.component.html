@@ -1,8 +1,57 @@
 <h1>¡Hola {{currentUser.firstName}}!</h1>
 <p>¡Bienvenido a la agenda!</p>
-<h3>All registered users:</h3>
+<!-- <h3>All registered users:</h3>
 <ul>
     <li *ngFor="let user of users">
         {{user.username}} ({{user.firstName}} {{user.lastName}}) - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
+    </li>
+</ul> -->
+<form [formGroup]="contactsForm" (ngSubmit)="onSubmit()">
+
+    <div>
+        <label for="first_name">
+          Nombre
+        </label>
+        <input id="first_name" type="text" formControlName="first_name">
+    </div>
+
+    <div>
+        <label for="last_name">
+          Apellido
+        </label>
+        <input id="last_name" type="text" formControlName="last_name">
+    </div>
+
+    <div>
+        <label for="age">
+          Edad
+        </label>
+        <input id="age" type="text" formControlName="age">
+    </div>
+
+    <div>
+        <label for="email">
+          Email
+        </label>
+        <input id="email" type="text" formControlName="email">
+    </div>
+
+    <button class="button">Guardar</button>
+
+</form>
+
+<hr />
+
+<h3>Contacts:</h3>
+<div class="cart-item" *ngFor="let contact of contacts">
+    <span>{{ contact.first_name }}</span>
+    <span>{{ contact.last_name }}</span>
+    <span>{{ contact.age }}</span>
+    <span>{{ contact.email }}</span>
+</div>
+<h3>Users2:</h3>
+<ul>
+    <li *ngFor="let user2 of users2">
+        <p>{{user2.first_name}} {{user2.last_name}} {{user2.age}} {{user2.email}}</p>
     </li>
 </ul>
