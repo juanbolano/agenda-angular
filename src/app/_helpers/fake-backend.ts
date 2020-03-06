@@ -5,7 +5,7 @@ import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 // array in local storage for registered users
 let users = JSON.parse(localStorage.getItem('users')) || [{ id: 1, firstName: 'Juan', lastName: 'Bolaño', username: 'admin', password: 'admin' }];
-let users2 = JSON.parse(localStorage.getItem('users2')) || [{ first_name: 'John', last_name: 'Doe', age: 29, email: 'john@doe.com' },{ first_name: 'Juan', last_name: 'Perez', age: 27, email: 'juan@perez.com' }];
+let contacts = JSON.parse(localStorage.getItem('contacts')) || [{ first_name: 'John', last_name: 'Doe', age: 29, email: 'john@doe.com', phone: '11 3333 4444' },{ first_name: 'Juan', last_name: 'Perez', age: 27, email: 'juan@perez.com', phone: '11 2222 3333' }];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -29,8 +29,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return createUser();
                 case url.endsWith('/users') && method === 'GET':
                     return getUsers();
-                case url.endsWith('/users2') && method === 'GET':
-                    return getUsers2();
+                case url.endsWith('/contacts') && method === 'GET':
+                    return getContacts();
                 case url.match(/\/users\/\d+$/) && method === 'DELETE':
                     return deleteUser();
                 default:
@@ -70,14 +70,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function createUser()
         {            
-            const user = body
+            const contact = body
 
-            if (users2.find(x => x.email === user.email)) {
-                return error('Email "' + user.email + '" is already taken')
+            if (contacts.find(x => x.email === contact.email)) {
+                return error('Email "' + contact.email + '" is already taken')
             }
 
-            users2.push(user);
-            localStorage.setItem('users2', JSON.stringify(users2));
+            contacts.push(contact);
+            localStorage.setItem('contacts', JSON.stringify(contacts));
             return ok();
         }
 
@@ -86,9 +86,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return ok(users);
         }
 
-        function getUsers2() {
+        function getContacts() {
             if (!isLoggedIn()) return unauthorized();
-            return ok(users2);
+            return ok(contacts);
         }
 
         function deleteUser() {

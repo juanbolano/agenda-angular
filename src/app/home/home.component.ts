@@ -4,14 +4,11 @@ import { first } from 'rxjs/operators';
 
 import { UserService, AuthenticationService, AlertService } from '../_services';
 
-import { contacts } from '../contacts';
-
-@Component({ templateUrl: 'home.component.html'})
+@Component({ templateUrl: 'home.component.html', host: {'class': 'col-sm-10 col-sm-offset-1'}})
 export class HomeComponent implements OnInit {
     currentUser: any;
     users = [];
-    users2 = [];
-    contacts = contacts;
+    contacts = [];
     contactsForm: FormGroup;
     submitted = false;
 
@@ -29,10 +26,11 @@ export class HomeComponent implements OnInit {
             first_name: ['', Validators.required],
             last_name: ['', Validators.required],
             age: ['', Validators.required],
-            email: ['', [Validators.required]]
+            email: ['', Validators.required],
+            phone: ['', Validators.required]
         });
         this.loadAllUsers();
-        this.loadAllUsers2();
+        this.loadAllContacts();
     }
 
     // convenience getter for easy access to form fields
@@ -48,10 +46,7 @@ export class HomeComponent implements OnInit {
         if (this.contactsForm.invalid) {
             return;
         }
-        this.submitted = false;
-
-        // Process checkout data here
-        this.contacts.push(this.contactsForm.value)        
+        this.submitted = false;    
 
         this.userService.createUser(this.contactsForm.value)
             .pipe(first())
@@ -78,9 +73,9 @@ export class HomeComponent implements OnInit {
             .subscribe(users => this.users = users);
     }
 
-    private loadAllUsers2() {
-        this.userService.getAll2()
+    private loadAllContacts() {
+        this.userService.getAllContacts()
             .pipe(first())
-            .subscribe(users2 => this.users2 = users2);
+            .subscribe(contacts => this.contacts = contacts);
     }
 }

@@ -147,6 +147,11 @@ button:disabled {
     color: #1976d2;
 }
 
+.h4-custom {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
 
 /* Checkout Cart, Shipping Prices */
 
@@ -162,4 +167,9 @@ button:disabled {
     margin-bottom: 8px;
     border-radius: 2px;
     background-color: #EEEEEE;
+}
+
+.card {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

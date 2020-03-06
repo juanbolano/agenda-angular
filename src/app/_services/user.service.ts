@@ -9,8 +9,8 @@ export class UserService {
         return this.http.get<any[]>(`${config.apiUrl}/users`);
     }
     
-    getAll2() {
-        return this.http.get<any[]>(`${config.apiUrl}/users2`);
+    getAllContacts() {
+        return this.http.get<any[]>(`${config.apiUrl}/contacts`);
     }
 
     createUser(user) {

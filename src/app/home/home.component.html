@@ -1,69 +1,80 @@
-<h1 class="h1 h1-custom">¡Hola {{currentUser.firstName}}!</h1>
-<h4>Agregar contacto a la agenda</h4>
-<!-- <h3>All registered users:</h3>
-<ul>
-    <li *ngFor="let user of users">
-        {{user.username}} ({{user.firstName}} {{user.lastName}}) - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
-    </li>
-</ul> -->
-<form [formGroup]="contactsForm" (ngSubmit)="onSubmit()">
-
-    <div class="form-group">
-        <label for="first_name" class="custom">
-          Nombre
-        </label>
-        <input id="first_name" type="text" formControlName="first_name" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
-        <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
-            <div *ngIf="f.first_name.errors.required">First Name is required</div>
-        </div>
+<div class="col-sm-8 offset-sm-2">
+    <div class="text-center">
+        <h1 class="h1 h1-custom">¡Hola {{currentUser.firstName}}!</h1>
     </div>
+    <h4 class="h4-custom">Agregar contacto a la agenda</h4>
+    <form [formGroup]="contactsForm" (ngSubmit)="onSubmit()">
 
-    <div class="form-group">
-        <label for="last_name" class="custom">
-          Apellido
-        </label>
-        <input id="last_name" type="text" formControlName="last_name" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }">
-        <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
-            <div *ngIf="f.last_name.errors.required">Last Name is required</div>
+        <div class="form-group row">
+            <div class="col-md-6 col-sm-12">
+                <label for="first_name" class="custom">
+                Nombre
+                </label>
+                <input id="first_name" type="text" formControlName="first_name" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
+                <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+                    <div *ngIf="f.first_name.errors.required">First Name is required</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <label for="last_name" class="custom">
+                Apellido
+                </label>
+                <input id="last_name" type="text" formControlName="last_name" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }">
+                <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+                    <div *ngIf="f.last_name.errors.required">Last Name is required</div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="age" class="custom">
-          Edad
-        </label>
-        <input id="age" type="text" formControlName="age" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.age.errors }">
-        <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
-            <div *ngIf="f.age.errors.required">Age is required</div>
+        <div class="form-group row">
+            <div class="col-md-6 col-sm-12">
+                <label for="age" class="custom">
+                Edad
+                </label>
+                <input id="age" type="text" formControlName="age" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.age.errors }">
+                <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
+                    <div *ngIf="f.age.errors.required">Age is required</div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <label for="phone" class="custom">
+                Teléfono
+                </label>
+                <input id="phone" type="text" formControlName="phone" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                    <div *ngIf="f.phone.errors.required">Phone is required</div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <label for="email" class="custom">
-          Email
-        </label>
-        <input id="email" type="text" formControlName="email" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-            <div *ngIf="f.email.errors.required">Email is required</div>
+        <div class="form-group">
+            <label for="email" class="custom">
+            Email
+            </label>
+            <input id="email" type="text" formControlName="email" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email is required</div>
+            </div>
+        </div>            
+
+        <div class="text-center">
+            <button class="button">Guardar</button>
         </div>
-    </div>
 
-    <button class="button">Guardar</button>
-
-</form>
-
+    </form>
+</div>
 <hr />
 
-<h3>Contacts:</h3>
-<div class="cart-item" *ngFor="let contact of contacts">
-    <span>{{ contact.first_name }}</span>
-    <span>{{ contact.last_name }}</span>
-    <span>{{ contact.age }}</span>
-    <span>{{ contact.email }}</span>
+<h3>Contactos</h3>
+<div class="row">
+    <div class="col-sm-6 col-md-4" *ngFor="let contact of contacts">
+    <div class="card bg-light mb-3">
+        <div class="card-header"><strong>{{contact.first_name}} {{contact.last_name}}</strong></div>
+        <div class="card-body">
+            <p class="card-text"><u>Edad:</u> {{contact.age}}</p>
+            <p class="card-text"><u>Mail:</u> {{contact.email}}</p>
+            <p class="card-text"><u>Teléfono:</u> {{contact.phone}}</p>
+        </div>
+    </div>
+    </div>
 </div>
-<h3>Users2:</h3>
-<ul>
-    <li *ngFor="let user2 of users2">
-        <p>{{user2.first_name}} {{user2.last_name}} {{user2.age}} {{user2.email}}</p>
-    </li>
-</ul>
