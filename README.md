@@ -1,6 +1,6 @@
 # Agenda
 
-[!(https://img.shields.io/badge/Angular-8.2.14-red)](https://v8.angular.io/docs)
+[![Angular](https://img.shields.io/badge/Angular-8.2.14-red)](https://v8.angular.io/docs)
 ![Master](https://img.shields.io/badge/Master-grey.svg)
 ![Develop](https://img.shields.io/badge/Develop-grey.svg)
 
