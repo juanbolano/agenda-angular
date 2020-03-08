@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { UserService, AuthenticationService, AlertService } from '../_services';
+import { CustomValidators } from '../_helpers/custom-validators';
 
 @Component({ templateUrl: 'register.component.html', host: {'class': 'col-sm-10 col-sm-offset-1'} })
 export class RegisterComponent implements OnInit {
@@ -29,7 +30,12 @@ export class RegisterComponent implements OnInit {
             firstName: ['', Validators.required],
             lastName: ['', Validators.required],
             username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(6)]]
+            password: [null, [Validators.required, Validators.minLength(6)]],    
+            confirmPassword: [null, Validators.compose([Validators.required])]
+        },
+        {
+           // check whether our password and confirm password match
+           validator: CustomValidators.passwordMatchValidator
         });
     }
 

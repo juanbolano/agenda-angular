@@ -31,7 +31,7 @@
                 <label for="age" class="custom">
                 Edad
                 </label>
-                <input id="age" type="text" formControlName="age" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.age.errors }">
+                <input id="age" type="number" formControlName="age" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.age.errors }">
                 <div *ngIf="submitted && f.age.errors" class="invalid-feedback">
                     <div *ngIf="f.age.errors.required">Age is required</div>
                 </div>
@@ -51,7 +51,7 @@
             <label for="email" class="custom">
             Email
             </label>
-            <input id="email" type="text" formControlName="email" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+            <input id="email" type="email" formControlName="email" class="custom form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
             <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                 <div *ngIf="f.email.errors.required">Email is required</div>
             </div>
@@ -71,7 +71,7 @@
     <div class="card bg-light mb-3">
         <div class="card-header"><strong>{{contact.first_name}} {{contact.last_name}}</strong></div>
         <div class="card-body">
-            <p class="card-text"><u>Edad:</u> {{contact.age}}</p>
+            <p class="card-text"><u>Edad:</u> {{contact.age || "-"}}</p>
             <p class="card-text"><u>Mail:</u> {{contact.email}}</p>
             <p class="card-text"><u>Teléfono:</u> {{contact.phone}}</p>
         </div>

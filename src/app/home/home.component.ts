@@ -25,8 +25,8 @@ export class HomeComponent implements OnInit {
         this.contactsForm = this.formBuilder.group({
             first_name: ['', Validators.required],
             last_name: ['', Validators.required],
-            age: ['', Validators.required],
-            email: ['', Validators.required],
+            age: ['', [Validators.min(0), Validators.max(150)]],
+            email: ['', [Validators.required, Validators.email]],
             phone: ['', Validators.required]
         });
         this.loadAllUsers();
